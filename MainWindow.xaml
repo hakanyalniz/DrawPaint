@@ -16,7 +16,8 @@
 
         <Canvas x:Name="DrawingCanvas"
                 Background="White"
-                MouseDown="Canvas_MouseDown"
+                MouseLeftButtonDown="Canvas_MouseLeftDown"
+                MouseRightButtonDown="Canvas_MouseRightDown"
                 MouseMove="Canvas_MouseMove"
                 MouseUp="Canvas_MouseUp"/>
 

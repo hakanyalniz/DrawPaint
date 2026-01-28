@@ -30,21 +30,39 @@ public partial class MainWindow : Window
     }
 
     // Mouse events
-    private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+    private void StartStroke(Point startPoint, Brush brush, double thickness)
     {
         // This is required for later on MouseMove
         isDrawing = true;
-        Point startPoint = e.GetPosition(DrawingCanvas);
 
         // After getting the position of mouse, we create a new Polyline and set brush properties
-        currentStroke = new Polyline();
-        currentStroke.Stroke = Brushes.Black;
-        currentStroke.StrokeThickness = 2;
+        currentStroke = new Polyline
+        {
+            Stroke = brush,
+            StrokeThickness = thickness
+        };
 
         // We add a point on the mouse point, then add the current polyline object to the canvas
         // From now on, when we make changes to it, it will reflect on the canvas until we remove the reference for it
         currentStroke.Points.Add(startPoint);
         DrawingCanvas.Children.Add(currentStroke);
+    }
+
+    // Draw black lines 
+    private void Canvas_MouseLeftDown(object sender, MouseButtonEventArgs e)
+    {
+        Point startPoint = e.GetPosition(DrawingCanvas);
+        StartStroke(startPoint, Brushes.Black, 2);
+
+
+        Debug($"Mouse down at {startPoint.X}, {startPoint.Y}");
+    }
+
+    // Eraser
+    private void Canvas_MouseRightDown(object sender, MouseButtonEventArgs e)
+    {
+        Point startPoint = e.GetPosition(DrawingCanvas);
+        StartStroke(startPoint, Brushes.White, 20);
 
 
         Debug($"Mouse down at {startPoint.X}, {startPoint.Y}");
@@ -63,6 +81,7 @@ public partial class MainWindow : Window
         Debug($"Mouse move at {position.X}, {position.Y}");
     }
 
+    // Stop drawing
     private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
     {
         // We are not drawing and remove the reference
