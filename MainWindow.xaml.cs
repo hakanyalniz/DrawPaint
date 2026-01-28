@@ -16,8 +16,45 @@ namespace DrawPaint;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private bool isDrawing;
+
     public MainWindow()
     {
         InitializeComponent();
+
+#if !DEBUG
+        DebugTextBox.Visibility = Visibility.Collapsed; // hide in Release
+#endif
+    }
+
+    private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        isDrawing = true;
+        Point position = e.GetPosition(DrawingCanvas);
+        Debug($"Mouse down at {position.X}, {position.Y}");
+
+    }
+
+    private void Canvas_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (!isDrawing)
+            return;
+
+        Point position = e.GetPosition(DrawingCanvas);
+        Debug($"Mouse move at {position.X}, {position.Y}");
+
+    }
+
+    private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
+    {
+        isDrawing = false;
+        Debug($"Drawing {isDrawing}");
+
+    }
+
+    private void Debug(string message)
+    {
+        DebugTextBox.AppendText(message + "\n");
+        DebugTextBox.ScrollToEnd();
     }
 }
