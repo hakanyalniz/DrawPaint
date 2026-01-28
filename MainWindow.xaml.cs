@@ -17,6 +17,8 @@ namespace DrawPaint;
 public partial class MainWindow : Window
 {
     private bool isDrawing;
+    private Polyline? currentStroke;
+
 
     public MainWindow()
     {
@@ -31,26 +33,38 @@ public partial class MainWindow : Window
     private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
     {
         isDrawing = true;
-        Point position = e.GetPosition(DrawingCanvas);
-        Debug($"Mouse down at {position.X}, {position.Y}");
+        Point startPoint = e.GetPosition(DrawingCanvas);
 
+        currentStroke = new Polyline();
+        currentStroke.Stroke = Brushes.Black;
+        currentStroke.StrokeThickness = 2;
+
+        currentStroke.Points.Add(startPoint);
+        DrawingCanvas.Children.Add(currentStroke);
+
+
+        Debug($"Mouse down at {startPoint.X}, {startPoint.Y}");
     }
 
     private void Canvas_MouseMove(object sender, MouseEventArgs e)
     {
-        if (!isDrawing)
+        if (!isDrawing || currentStroke == null)
             return;
 
         Point position = e.GetPosition(DrawingCanvas);
-        Debug($"Mouse move at {position.X}, {position.Y}");
+        currentStroke.Points.Add(position);
 
+
+        Debug($"Mouse move at {position.X}, {position.Y}");
     }
 
     private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
     {
         isDrawing = false;
-        Debug($"Drawing {isDrawing}");
+        currentStroke = null;
 
+
+        Debug($"Drawing {isDrawing}");
     }
 
     // Log information for debugging
