@@ -27,6 +27,7 @@ public partial class MainWindow : Window
 #endif
     }
 
+    // Mouse events
     private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
     {
         isDrawing = true;
@@ -52,6 +53,7 @@ public partial class MainWindow : Window
 
     }
 
+    // Log information for debugging
     private void Debug(string message)
     {
         DebugTextBox.AppendText(message + "\n");

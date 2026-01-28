@@ -24,7 +24,7 @@
         <TextBox x:Name="DebugTextBox"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Bottom"
-                 Width="400"
+                 Width="200"
                  Height="100"
                  Margin="10"
                  TextWrapping="Wrap"
