@@ -9,12 +9,40 @@
         Height="450"
         Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
 
-        <Canvas x:Name="DrawingCanvas"
+        <!-- Left toolbar -->
+        <StackPanel Grid.Column="0"
+                    Background="#EEE"
+                    VerticalAlignment="Stretch">
+            <Border x:Name="Black"
+                    Height="30"
+                    Width="30"
+                    Margin="5"
+                    Background="Black"/>
+            <Border x:Name="Red"
+                    Height="30"
+                    Width="30"
+                    Margin="5"
+                    Background="Red"/>
+            <Border x:Name="Blue"
+                    Height="30"
+                    Width="30"
+                    Margin="5"
+                    Background="Blue"/>
+            <Border  x:Name="Green"
+                     Height="30"
+                     Width="30"
+                     Margin="5"
+                     Background="Green"/>
+        </StackPanel>
+
+        <Canvas Grid.Column="1"
+                x:Name="DrawingCanvas"
                 Background="White"
                 MouseLeftButtonDown="Canvas_MouseLeftDown"
                 MouseRightButtonDown="Canvas_MouseRightDown"
@@ -22,7 +50,8 @@
                 MouseUp="Canvas_MouseUp"/>
 
         <!-- Debug helper TextBox -->
-        <TextBox x:Name="DebugTextBox"
+        <TextBox Grid.Column="3"
+                 x:Name="DebugTextBox"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Bottom"
                  Width="200"
