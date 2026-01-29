@@ -18,7 +18,8 @@
         <!-- Left toolbar -->
         <StackPanel Grid.Column="0"
                     Background="#EEE"
-                    VerticalAlignment="Stretch">
+                    VerticalAlignment="Stretch"
+                    MouseLeftButtonDown="ToolsPanel_MouseLeftButtonDown">
             <Border x:Name="Black"
                     Height="30"
                     Width="30"

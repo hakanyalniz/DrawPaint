@@ -18,6 +18,7 @@ public partial class MainWindow : Window
 {
     private bool isDrawing;
     private Polyline? currentStroke;
+    private SolidColorBrush BrushTipColor = Brushes.Black;
 
 
     public MainWindow()
@@ -53,7 +54,7 @@ public partial class MainWindow : Window
     private void Canvas_MouseLeftDown(object sender, MouseButtonEventArgs e)
     {
         Point startPoint = e.GetPosition(DrawingCanvas);
-        StartStroke(startPoint, Brushes.Black, 2);
+        StartStroke(startPoint, BrushTipColor, 2);
 
 
         Debug($"Mouse down at {startPoint.X}, {startPoint.Y}");
@@ -91,6 +92,34 @@ public partial class MainWindow : Window
 
 
         Debug($"Drawing {isDrawing}");
+    }
+
+    // Handles toolbar clicks, changing color and so on
+    private void ToolsPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.OriginalSource is Border)
+        {
+            Border border = (Border)e.OriginalSource;
+            if (border == Black)
+            {
+                BrushTipColor = Brushes.Black;
+            }
+            else if (border == Red)
+            {
+                BrushTipColor = Brushes.Red;
+
+            }
+            else if (border == Blue)
+            {
+                BrushTipColor = Brushes.Blue;
+
+            }
+            else if (border == Green)
+            {
+                BrushTipColor = Brushes.Green;
+
+            }
+        }
     }
 
     // Log information for debugging
