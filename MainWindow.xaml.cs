@@ -39,7 +39,8 @@ public partial class MainWindow : Window
         currentStroke = new Polyline
         {
             Stroke = brush,
-            StrokeThickness = thickness
+            StrokeThickness = thickness,
+            StrokeLineJoin = PenLineJoin.Round
         };
 
         // We add a point on the mouse point, then add the current polyline object to the canvas
